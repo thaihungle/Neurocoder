@@ -1,0 +1,194 @@
+split_boundaries: [0, 2, 4, 6, 8, 10]
+{'1': [0, 1], '2': [2, 3], '3': [4, 5], '4': [6, 7], '5': [8, 9]}
+FF nsa
+MLP(
+  (nsa1): ProgammedController(
+    (program_key_u): Linear(in_features=1024, out_features=50, bias=True)
+    (program_key_v): Linear(in_features=1024, out_features=50, bias=True)
+    (program_key_s): Linear(in_features=1024, out_features=50, bias=True)
+    (res_s): Linear(in_features=1024, out_features=1, bias=True)
+    (p2ku): Linear(in_features=1024, out_features=5, bias=True)
+    (p2kv): Linear(in_features=400, out_features=5, bias=True)
+  )
+  (nsa2): ProgammedController(
+    (program_key_u): Linear(in_features=400, out_features=50, bias=True)
+    (program_key_v): Linear(in_features=400, out_features=50, bias=True)
+    (program_key_s): Linear(in_features=400, out_features=50, bias=True)
+    (res_s): Linear(in_features=400, out_features=1, bias=True)
+    (p2ku): Linear(in_features=400, out_features=5, bias=True)
+    (p2kv): Linear(in_features=400, out_features=5, bias=True)
+  )
+  (linear): Sequential(
+    (0): ProgammedController(
+      (program_key_u): Linear(in_features=1024, out_features=50, bias=True)
+      (program_key_v): Linear(in_features=1024, out_features=50, bias=True)
+      (program_key_s): Linear(in_features=1024, out_features=50, bias=True)
+      (res_s): Linear(in_features=1024, out_features=1, bias=True)
+      (p2ku): Linear(in_features=1024, out_features=5, bias=True)
+      (p2kv): Linear(in_features=400, out_features=5, bias=True)
+    )
+    (1): ReLU(inplace=True)
+    (2): ProgammedController(
+      (program_key_u): Linear(in_features=400, out_features=50, bias=True)
+      (program_key_v): Linear(in_features=400, out_features=50, bias=True)
+      (program_key_s): Linear(in_features=400, out_features=50, bias=True)
+      (res_s): Linear(in_features=400, out_features=1, bias=True)
+      (p2ku): Linear(in_features=400, out_features=5, bias=True)
+      (p2kv): Linear(in_features=400, out_features=5, bias=True)
+    )
+    (3): ReLU(inplace=True)
+  )
+  (last): ModuleDict(
+    (All): ProgammedController(
+      (program_key_u): Linear(in_features=400, out_features=50, bias=True)
+      (program_key_v): Linear(in_features=400, out_features=50, bias=True)
+      (program_key_s): Linear(in_features=400, out_features=50, bias=True)
+      (res_s): Linear(in_features=400, out_features=1, bias=True)
+      (p2ku): Linear(in_features=400, out_features=5, bias=True)
+      (p2kv): Linear(in_features=2, out_features=5, bias=True)
+    )
+  )
+  (nsa_last): ProgammedController(
+    (program_key_u): Linear(in_features=400, out_features=50, bias=True)
+    (program_key_v): Linear(in_features=400, out_features=50, bias=True)
+    (program_key_s): Linear(in_features=400, out_features=50, bias=True)
+    (res_s): Linear(in_features=400, out_features=1, bias=True)
+    (p2ku): Linear(in_features=400, out_features=5, bias=True)
+    (p2kv): Linear(in_features=2, out_features=5, bias=True)
+  )
+)
+#parameter of model:  423539
+no learnable params:  134502
+Task order: ['1', '2', '3', '4', '5']
+====================== 1 =======================
+#reg_term: 0
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.6055 (0.6055)	0.0935 (0.0935)	0.693 (0.693)	46.09 (46.09)
+[98/99]	0.0472 (0.0533)	0.0015 (0.0024)	0.000 (0.074)	100.00 (97.17)
+ * Train Acc 97.173
+ * Val Acc 99.905, Total time 0.30
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.1464 (0.1464)	0.0999 (0.0999)	0.000 (0.000)	100.00 (100.00)
+[98/99]	0.0452 (0.0491)	0.0014 (0.0025)	0.000 (0.004)	100.00 (99.87)
+ * Train Acc 99.866
+ * Val Acc 99.905, Total time 0.31
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.1553 (0.1553)	0.1081 (0.1081)	0.001 (0.001)	100.00 (100.00)
+[98/99]	0.0442 (0.0475)	0.0014 (0.0025)	0.000 (0.003)	100.00 (99.94)
+ * Train Acc 99.937
+ * Val Acc 99.905, Total time 0.32
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/99]	0.1466 (0.1466)	0.0994 (0.0994)	0.000 (0.000)	100.00 (100.00)
+[98/99]	0.0442 (0.0481)	0.0014 (0.0024)	0.000 (0.002)	100.00 (99.94)
+ * Train Acc 99.937
+ * Val Acc 99.905, Total time 0.30
+Computing SI
+validation split name: 1
+ * Val Acc 99.905, Total time 0.29
+====================== 2 =======================
+#reg_term: 1
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.1521 (0.1521)	0.0999 (0.0999)	54.699 (54.699)	55.47 (55.47)
+[94/95]	0.0325 (0.0519)	0.0014 (0.0025)	-49369.055 (-17348.681)	63.16 (51.52)
+ * Train Acc 51.518
+ * Val Acc 50.539, Total time 0.31
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.1540 (0.1540)	0.1025 (0.1025)	-50399.848 (-50399.848)	45.31 (45.31)
+[94/95]	0.0331 (0.0513)	0.0014 (0.0024)	-148978.703 (-97459.840)	54.39 (50.66)
+ * Train Acc 50.658
+ * Val Acc 50.735, Total time 0.30
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.1465 (0.1465)	0.0955 (0.0955)	-150198.484 (-150198.484)	56.25 (56.25)
+[94/95]	0.0326 (0.0515)	0.0014 (0.0024)	-261813.219 (-204853.280)	52.63 (55.64)
+ * Train Acc 55.637
+ * Val Acc 72.233, Total time 0.30
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/95]	0.1538 (0.1538)	0.1019 (0.1019)	-263661.844 (-263661.844)	71.09 (71.09)
+[94/95]	0.0320 (0.0516)	0.0014 (0.0025)	-389114.625 (-324621.256)	57.89 (59.88)
+ * Train Acc 59.881
+ * Val Acc 73.947, Total time 0.30
+Computing SI
+validation split name: 1
+ * Val Acc 55.461, Total time 0.32
+validation split name: 2
+ * Val Acc 73.947, Total time 0.30
+====================== 3 =======================
+#reg_term: 1
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/88]	0.1562 (0.1562)	0.1053 (0.1053)	21877.828 (21877.828)	56.25 (56.25)
+[87/88]	0.0497 (0.0515)	0.0013 (0.0026)	-9878479.000 (-3199497.501)	55.12 (56.13)
+ * Train Acc 56.131
+ * Val Acc 42.529, Total time 0.28
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/88]	0.1484 (0.1484)	0.0963 (0.0963)	-10018645.000 (-10018645.000)	42.97 (42.97)
+[87/88]	0.0528 (0.0525)	0.0014 (0.0026)	-32153010.000 (-20572304.922)	61.42 (56.18)
+ * Train Acc 56.184
+ * Val Acc 57.417, Total time 0.29
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/88]	0.1562 (0.1562)	0.1032 (0.1032)	-32434554.000 (-32434554.000)	57.81 (57.81)
+[87/88]	0.0495 (0.0525)	0.0013 (0.0027)	-58670320.000 (-45275641.318)	66.93 (58.00)
+ * Train Acc 58.004
+ * Val Acc 60.245, Total time 0.28
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/88]	0.1525 (0.1525)	0.1015 (0.1015)	-59133000.000 (-59133000.000)	59.38 (59.38)
+[87/88]	0.0529 (0.0521)	0.0014 (0.0026)	-88235680.000 (-73394687.500)	57.48 (55.78)
+ * Train Acc 55.776
+ * Val Acc 52.721, Total time 0.31
+Computing SI
+validation split name: 1
+ * Val Acc 46.336, Total time 0.35
+validation split name: 2
+ * Val Acc 50.539, Total time 0.31
+validation split name: 3
+ * Val Acc 52.721, Total time 0.30
+====================== 4 =======================
+#reg_term: 1
+Epoch:0
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.1638 (0.1638)	0.1084 (0.1084)	1291910.750 (1291910.750)	52.34 (52.34)
+[95/96]	0.0332 (0.0544)	0.0014 (0.0026)	-262337088.000 (-72024112.414)	56.52 (55.75)
+ * Train Acc 55.750
+ * Val Acc 58.963, Total time 0.32
+Epoch:1
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.1570 (0.1570)	0.1038 (0.1038)	-269041920.000 (-269041920.000)	46.88 (46.88)
+[95/96]	0.0318 (0.0523)	0.0014 (0.0026)	-1063185792.000 (-636329546.260)	60.87 (51.48)
+ * Train Acc 51.482
+ * Val Acc 60.926, Total time 0.29
+Epoch:2
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.1528 (0.1528)	0.1020 (0.1020)	-1068915904.000 (-1068915904.000)	60.94 (60.94)
+[95/96]	0.0308 (0.0517)	0.0013 (0.0023)	-2055242112.000 (-1543460149.058)	39.13 (53.18)
+ * Train Acc 53.181
+ * Val Acc 61.782, Total time 0.29
+Epoch:3
+LR: 0.001
+Itr		Time		  Data		  Loss		Acc
+[0/96]	0.1645 (0.1645)	0.1125 (0.1125)	-2066955904.000 (-2066955904.000)	57.03 (57.03)
