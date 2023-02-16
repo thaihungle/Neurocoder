@@ -32,7 +32,7 @@ def θ(a, b, dimA=2, dimB=2, normBy=2):
 
 class ProgammedController(nn.Module):
     def __init__(self, program_shape, program_interface_size, pkey_dim=5, num_program=20,
-                 bias=False, svd_num_features=8, top_lu=10, has_res_w="n", low_rank_factor=0,
+                 bias=False, svd_num_features=8, top_lu=10, has_res_w="n",
                  kc_mode="lk", rnn_step=10):
         super(ProgammedController, self).__init__()
         self.pkey_dim = pkey_dim
@@ -41,7 +41,6 @@ class ProgammedController(nn.Module):
         self.has_bias = bias
         self.rnn_step = rnn_step
         self.top_lu = top_lu
-        self.lrf = low_rank_factor
         self.has_res_w = has_res_w
         self.svd_num_features = svd_num_features
         self.kc_mode = kc_mode
@@ -57,17 +56,9 @@ class ProgammedController(nn.Module):
                                              requires_grad=True))
 
         if self.has_res_w == "y":
-            if self.lrf<2:
-                self.res_weight = nn.Parameter(torch.zeros(program_shape[0],
-                                          program_shape[1],
-                                          requires_grad=True))
-            else:
-                self.res_weight_l = nn.Parameter(torch.zeros(program_shape[0],
-                                                           program_shape[1]//self.lrf,
-                                                           requires_grad=True))
-                self.res_weight_r = nn.Parameter(torch.zeros(program_shape[1]//self.lrf,
-                                                           program_shape[1],
-                                                           requires_grad=True))
+            self.res_weight = nn.Parameter(torch.zeros(program_shape[0],
+                                      program_shape[1],
+                                      requires_grad=True))
 
         if self.rnn_step == 0:
 
@@ -92,7 +83,7 @@ class ProgammedController(nn.Module):
 
         for name, param in self.named_parameters():
             if "PM" not in name:
-                param.requires_grad = False
+                param.requires_grad = True
 
         self.bias = nn.Parameter(torch.zeros(program_shape[1],
                                              requires_grad=True))
@@ -107,11 +98,7 @@ class ProgammedController(nn.Module):
         nn.init.xavier_uniform_(self.PM_V, gain=1)
         nn.init.xavier_uniform_(self.PM_S, gain=1)
         if self.has_res_w == "y":
-            if self.lrf<2:
-                nn.init.xavier_uniform_(self.res_weight, gain=1)
-            else:
-                nn.init.xavier_uniform_(self.res_weight_l, gain=1)
-                nn.init.xavier_uniform_(self.res_weight_r, gain=1)
+            nn.init.xavier_uniform_(self.res_weight, gain=1)
             nn.init.normal_(self.bias, std=0.01)
 
         if self.rnn_step == 0:
@@ -317,10 +304,7 @@ class ProgammedController(nn.Module):
         self.updateMK()
         self.init_seq()
         if  self.has_res_w == "y":
-            if self.lrf<2:
-                res_weight = self.res_weight
-            else:
-                res_weight = torch.matmul(self.res_weight_l, self.res_weight_r)
+            res_weight = self.res_weight
 
         if self.rnn_step == 0:
             U = self.read_Us(x)
