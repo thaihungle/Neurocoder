@@ -17,6 +17,7 @@ Install other packages if possible
 
 ```
 cd cl
+mkdir data
 
 ```
 Run baseline MLP
@@ -28,6 +29,6 @@ Run baseline Neurocoder
 ./scripts/split_MNIST_incremental_domain.sh  nsa
 ```
 Notes: 
-- Results are logged in outputs/ 
-- Choose CL backbone by modifying scripts/split_MNIST_incremental_domain.sh  
-- Core model code is in models/nsa.py
+- Results are logged in cl/outputs/ 
+- Choose CL backbone by modifying cl/scripts/split_MNIST_incremental_domain.sh  
+- Core model code is in cl/models/nsa.py
